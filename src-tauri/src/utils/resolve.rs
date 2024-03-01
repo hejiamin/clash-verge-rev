@@ -42,8 +42,6 @@ pub fn resolve_setup(app: &mut App) {
     VERSION.get_or_init(|| version.clone());
 
     log_err!(init::init_resources());
-    #[cfg(target_os = "windows")]
-    log_err!(init::init_service());
     log_err!(init::init_scheme());
     log_err!(init::startup_script());
     // 处理随机端口
@@ -143,7 +141,10 @@ pub fn create_window(app_handle: &AppHandle) {
         _ => {
             #[cfg(target_os = "windows")]
             {
-                builder = builder.inner_size(800.0, 636.0).center();
+                builder = builder
+                    .additional_browser_args("--enable-features=msWebView2EnableDraggableRegions")
+                    .inner_size(800.0, 636.0)
+                    .center();
             }
 
             #[cfg(target_os = "macos")]
@@ -245,6 +246,7 @@ pub async fn resolve_scheme(param: String) {
         user_agent: None,
         with_proxy: Some(true),
         self_proxy: None,
+        danger_accept_invalid_certs: None,
         update_interval: None,
     };
     if let Ok(item) = PrfItem::from_url(url, None, None, Some(option)).await {

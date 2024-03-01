@@ -36,6 +36,18 @@ pub struct IVerge {
     /// show memory info (only for Clash Meta)
     pub enable_memory_usage: Option<bool>,
 
+    /// enable group icon
+    pub enable_group_icon: Option<bool>,
+
+    /// common tray icon
+    pub common_tray_icon: Option<bool>,
+
+    /// sysproxy tray icon
+    pub sysproxy_tray_icon: Option<bool>,
+
+    /// tun tray icon
+    pub tun_tray_icon: Option<bool>,
+
     /// clash tun mode
     pub enable_tun_mode: Option<bool>,
 
@@ -80,6 +92,9 @@ pub struct IVerge {
 
     /// 默认的延迟测试连接
     pub default_latency_test: Option<String>,
+
+    /// 默认的延迟测试超时时间
+    pub default_latency_timeout: Option<i32>,
 
     /// 是否使用内部的脚本支持，默认为真
     pub enable_builtin_enhanced: Option<bool>,
@@ -160,6 +175,10 @@ impl IVerge {
             start_page: Some("/".into()),
             traffic_graph: Some(true),
             enable_memory_usage: Some(true),
+            enable_group_icon: Some(true),
+            common_tray_icon: Some(false),
+            sysproxy_tray_icon: Some(false),
+            tun_tray_icon: Some(false),
             enable_auto_launch: Some(false),
             enable_silent_start: Some(false),
             enable_system_proxy: Some(false),
@@ -201,6 +220,10 @@ impl IVerge {
         patch!(startup_script);
         patch!(traffic_graph);
         patch!(enable_memory_usage);
+        patch!(enable_group_icon);
+        patch!(common_tray_icon);
+        patch!(sysproxy_tray_icon);
+        patch!(tun_tray_icon);
 
         patch!(enable_tun_mode);
         patch!(enable_service_mode);
@@ -222,6 +245,7 @@ impl IVerge {
 
         patch!(auto_close_connection);
         patch!(default_latency_test);
+        patch!(default_latency_timeout);
         patch!(enable_builtin_enhanced);
         patch!(proxy_layout_column);
         patch!(test_list);

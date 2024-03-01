@@ -41,7 +41,6 @@ const SettingClash = ({ onError }: Props) => {
   const { enable_random_port = false, verge_mixed_port } = verge ?? {};
 
   const webRef = useRef<DialogRef>(null);
-  const fieldRef = useRef<DialogRef>(null);
   const portRef = useRef<DialogRef>(null);
   const ctrlRef = useRef<DialogRef>(null);
   const coreRef = useRef<DialogRef>(null);
@@ -119,7 +118,7 @@ const SettingClash = ({ onError }: Props) => {
         extra={
           <Tooltip title={t("Random Port")}>
             <IconButton
-              color={enable_random_port ? "success" : "inherit"}
+              color={enable_random_port ? "primary" : "inherit"}
               size="small"
               onClick={() => {
                 Notice.success(t("After restart to take effect"), 1000);
